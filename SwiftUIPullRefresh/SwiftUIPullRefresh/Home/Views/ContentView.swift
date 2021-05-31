@@ -15,13 +15,16 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(productVM.products, id:\.self) { product in
-                    Text(product.post_image)
+                    AsyncImageView(url: URL(string: product.post_image)!)
+                        .aspectRatio(contentMode: .fit)
+                    
+                    Text(product.post_name)
                 }
             }
             .onAppear{
                 productVM.getData()
             }
-            .navigationTitle("Product")
+            .navigationTitle("Product \(productVM.products.count)")
         }
 
     }

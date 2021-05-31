@@ -11,7 +11,7 @@ struct ProductService {
     
     func getAPI(completion: @escaping (Result<[ProductModel], NetworkError>)->()) {
         
-        let urlString = "http://homenano.trueddns.com:24349/api/posts"
+        let urlString = Server
         
         guard let url = URL(string: urlString) else {
             completion(.failure(.custom(errorMessage: "URL is not valide")))

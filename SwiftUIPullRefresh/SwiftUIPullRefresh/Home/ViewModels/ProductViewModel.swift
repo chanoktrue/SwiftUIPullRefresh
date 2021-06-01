@@ -8,18 +8,19 @@
 import SwiftUI
 
 class ProductViewModel: ObservableObject {
-    
     @Published var products = [ProductModel]()
     
-    func getData() {
+    func getData(completion: @escaping (Bool)->()) {
         ProductService().getAPI { result in
             switch result {
             case .success(let products):
-            DispatchQueue.main.async {
-                self.products = products
-            }
+                DispatchQueue.main.async {
+                    self.products = products
+                    completion(true)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
+                completion(false)
             }
         }
     }
